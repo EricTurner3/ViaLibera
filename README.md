@@ -14,12 +14,19 @@ $ git clone https://github.com/EricTurner3/ViaLibera.git
 $ cd ViaLibera
 ```
 > 👉 Install modules via `VENV`  
-
 ```bash
+# Linux
 $ virtualenv env
 $ source env/bin/activate
 $ pip install -r requirements.txt
 ```
+```ps
+# Windows
+PS > python -m venv env
+PS > . .\env\Scripts\Activate.ps1
+PS > pip install -r requirements.txt
+```
+
 > 👉 Set Up Database
 
 ```bash
