@@ -86,7 +86,7 @@ class Vehicle(models.Model):
     vin = models.CharField(max_length=18)
     nickname = models.CharField(max_length=50, null=True)
     primary_driver = models.ForeignKey('Person', on_delete=models.CASCADE)
-    img = models.ImageField(upload_to = "images/vehicles/", null=True)
+    img = models.ImageField(upload_to = "static/images/vehicles/", null=True)
  
         # renames the instances of the model
         # with their title name
