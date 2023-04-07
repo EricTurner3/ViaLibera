@@ -48,6 +48,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "home",
+    "vehicle",
+    "inspection",
+    "fuel",
+    "maintenance"
 ]
 
 MIDDLEWARE = [
@@ -63,7 +67,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "core.urls"
 
-HOME_TEMPLATES = os.path.join(BASE_DIR, 'home', 'templates')
+HOME_TEMPLATES = os.path.join(BASE_DIR, 'main', 'templates')
 
 TEMPLATES = [
     {
