@@ -91,6 +91,8 @@ Tables required to fulfill attaching specs to a vehicle
 class SpecificationCategory(models.Model):
     category_name = models.CharField(max_length=25)
     category_desc = models.CharField(max_length=100, null=True, blank=True)
+    icon = models.CharField(max_length=50, default='fas fa-star')
+    order = models.IntegerField(unique=True, null=True, blank=True)
  
     def __str__(self):
         return self.category_name
@@ -99,7 +101,7 @@ class SpecificationCategory(models.Model):
         verbose_name_plural = "Specification Categories"
     
 class Specification(models.Model):
-    category_id = models.ForeignKey('SpecificationCategory', on_delete=models.CASCADE)
+    category = models.ForeignKey('SpecificationCategory', on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     units = models.CharField(max_length=10, null=True, blank=True)
  
@@ -107,16 +109,19 @@ class Specification(models.Model):
         return self.name
     
 class VehicleSpecification(models.Model):
-    specification_id = models.ForeignKey('Specification', on_delete=models.CASCADE)
-    vehicle_id = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
+    specification = models.ForeignKey('Specification', on_delete=models.CASCADE)
+    vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
     value = models.CharField(max_length=100)
     url = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.vehicle) + ': [' + str(self.specification.category.category_name) + '] - ' + str(self.specification)
  
  # this is the master table for the vehicle. It will connect to either log, inspection result or service
 # at one time, a vehicle could be in for a fillup, inspection and service at once. It will re-use the same mileage and date time.
 class Log(models.Model):
-    location_id = models.ForeignKey('home.Location', on_delete=models.CASCADE)
-    vehicle_id = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
+    location = models.ForeignKey('home.Location', on_delete=models.CASCADE)
+    vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
     dt = models.DateTimeField(auto_now=True)
     mileage = models.DecimalField(decimal_places=2, max_digits=9)
     def __str__(self):

@@ -1,0 +1,74 @@
+{% extends "layouts/base.html" %}
+{% load i18n static %}
+{% load static %}
+
+{% block title %} Home {% endblock title %}
+
+{% block overlay %}
+  <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('/{{  vehicle.img }}'); background-position:center; background-size: cover;">
+    <span class="mask bg-primary opacity-6"></span>
+  </div>
+{% endblock overlay %}
+
+
+
+{% block content %}
+    <div class="card shadow-lg mx-4 card-profile-bottom">
+      <div class="card-body p-3">
+        <div class="row gx-4">
+          <div class="col-auto my-auto">
+            <div class="h-100">
+              <h5 class="mb-1">
+                {{vehicle}}
+              </h5>
+              <p class="mb-0 font-weight-bold text-sm">
+                {{ vehicle.vin }}
+              </p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="d-flex align-items-center">
+                <p class="mb-0">Vehicle Specifications</p>
+                <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                  <div class="nav-wrapper position-relative end-0">
+                    <ul class="nav nav-pills nav-fill p-1" role="tablist" id="pills-tab">
+                    {% for cat in categories %}
+                      <li class="nav-item" role="presentation">
+                        <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center {%if cat.id == 1%} active {%endif%}" id="{{cat.category_name|lower}}-tab" data-bs-toggle="pill" data-bs-target="#spec-{{cat.category_name|lower}}" type="button"  role="tab" aria-controls="spec-{{cat.category_name|lower}}" aria-selected="true">
+                          <i class="{{cat.icon}}"></i>
+                          <span class="ms-2">{{cat.category_name}}</span>
+                        </a>
+                      </li>
+                    {% endfor %}  
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body tab-content" id="pills-tabContent">
+              {% for cat in categories %}
+              <div class="tab-pane fade {%if cat.id == 1%}show active{%endif%}" id="spec-{{cat.category_name|lower}}" role="tabpanel" aria-labelledby="{{cat.category_name|lower}}-tab">
+                {% for spec in specs %}
+                  {% if cat.category_name == spec.specification.category.category_name %}
+                      <p class="text-uppercase text-sm"><b>{{spec.specification}}</b>: {{spec.value}}</p>
+                  {% endif %}
+                {% endfor %} 
+              </div>
+              {% endfor %}  
+            </div>
+          </div>
+        </div>
+      </div>
+      {% include 'includes/footer.html' %}
+    </div>
+  </div>
+
+  {% endblock content %}
