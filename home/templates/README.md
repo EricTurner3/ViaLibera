@@ -1,2 +1,0 @@
-# Customization
-* Per the guide [here](https://docs.appseed.us/products/django-dashboards/argon-dashboard#how-to-customize), copy the file that needs to be customized out of the `env\Lib\site-packages\admin_argon\templates` directory and mirror it in `\home\templates` with the modifications.

@@ -1,79 +1,85 @@
-# ViaLibera
-A free, open-source vehicle management web application, written in Python
+# ViaLibera - Vehicle Logging Application
 
+A comprehensive vehicle logging application built with Django and Vue.js that helps you track your vehicle's maintenance, fuel consumption, and service history.
 
-## Powered by
-* [Django Argon Dashboard](https://github.com/app-generator/django-argon-dashboard) template
+## Features
 
+- User authentication
+- Vehicle management (CRUD operations)
+- Fuel consumption tracking
+- Service history recording
+- Dashboard views
+- Timeline view of vehicle history
+- Mobile-responsive design
 
-## Setup Instructions (forked from the template's [readme](https://github.com/app-generator/django-argon-dashboard/blob/master/README.md))
-> 👉 Download the code  
+## Tech Stack
 
+- Backend: Django + Django REST Framework
+- Frontend: Vue.js
+- Database: PostgreSQL
+- Authentication: JWT (JSON Web Tokens)
+
+## Setup Instructions
+
+### Backend Setup
+
+1. Create a virtual environment:
 ```bash
-$ git clone https://github.com/EricTurner3/ViaLibera.git
-$ cd ViaLibera
+python -m venv venv
+source venv/bin/activate  # On Windows: . .\venv\Scripts\Activate.ps1
 ```
-> 👉 Install modules via `VENV`  
+
+2. Install dependencies:
 ```bash
-# Linux
-$ virtualenv env
-$ source env/bin/activate
-$ pip install -r requirements.txt
-```
-```ps
-# Windows
-PS > python -m venv env
-PS > . .\env\Scripts\Activate.ps1
-PS > pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
-> 👉 Set Up Database
+3. Set up environment variables:
+Create a `.env` file in the root directory with:
+```
+DEBUG=True
+SECRET_KEY=your-secret-key
+DATABASE_URL=postgresql://user:password@localhost:5432/vialibera
+```
 
+4. Run migrations:
 ```bash
-$ python manage.py makemigrations
-$ python manage.py migrate
+cd backend
+python manage.py migrate
 ```
 
-> 👉 Create the Superuser
-
+5. Create superuser:
 ```bash
-$ python manage.py createsuperuser
+python manage.py createsuperuser
 ```
 
-> 👉 Start the app
-
+6. Run the development server:
 ```bash
-$ python manage.py runserver
+python manage.py runserver
 ```
 
-At this point, the app runs at `http://127.0.0.1:8000/`. 
+### Frontend Setup
 
-<br />
-
-## Codebase structure
-
-The project is coded using a simple and intuitive structure presented below:
-
+1. Install Node.js dependencies:
 ```bash
-< PROJECT ROOT >
-   |
-   |-- core/                            
-   |    |-- settings.py                  # Project Configuration  
-   |    |-- urls.py                      # Project Routing
-   |
-   |-- home/
-   |    |-- views.py                     # APP Views 
-   |    |-- urls.py                      # APP Routing
-   |    |-- models.py                    # APP Models 
-   |    |-- tests.py                     # Tests  
-   |    |-- templates/                   # Theme Customisation 
-   |         |-- includes                # 
-   |              |-- custom-footer.py   # Custom Footer      
-   |     
-   |-- requirements.txt                  # Project Dependencies
-   |
-   |-- env.sample                        # ENV Configuration (default values)
-   |-- manage.py                         # Start the app - Django default start script
-   |
-   |-- ************************************************************************
+cd frontend
+npm install
 ```
+
+2. Run the development server:
+```bash
+npm run serve
+```
+
+## Default Credentials
+
+- Username: admin
+- Password: admin123
+
+## API Documentation
+
+The API documentation is available at `/api/docs/` when running the backend server.
+
+## License
+
+GLPv3
